@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, ParamsDictionary } from 'express-serve-static-core';
 import logging from '../library/logging';
 
 //each synonymsGroup consists of a collection of synonyms words
@@ -24,9 +24,9 @@ const createSynonyms = async (synonymCollection: Request['body']) => {
     });
 };
 
-const getSynonyms = async (reqObj: Request['body']) => {
+const getSynonyms = async (reqPara: ParamsDictionary) => {
     return new Promise((resolve, reject) => {
-        const { word } = reqObj;
+        const { word } = reqPara;
         if (typeof word !== 'undefined') {
             const synonymGroupIndex = getSynonymsGroupIdx(word);
             if (synonymGroupIndex !== -1) {

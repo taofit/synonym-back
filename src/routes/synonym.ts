@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post('/', controller.createSynonym);
 router.put('/', controller.updateSynonym);
-router.get('/', controller.getSynonyms);
+router.get('/:word', controller.getSynonyms);
 
 export default router;

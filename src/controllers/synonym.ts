@@ -16,7 +16,7 @@ const createSynonym = async (req: Request, res: Response, next: NextFunction) =>
 
 const getSynonyms = async (req: Request, res: Response) => {
     try {
-        const synonyms = await Synonym.getSynonyms(req.body);
+        const synonyms = await Synonym.getSynonyms(req.params);
         res.status(200).json(synonyms);
     } catch (error) {
         res.status(500).json(error);

@@ -41,3 +41,5 @@ app.use((req, res) => {
 app.listen(port, () => {
     logging.log(`server started at http://localhost:${port}`);
 });
+
+export { app };
