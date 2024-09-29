@@ -12,6 +12,7 @@
     "author": "Tao",
     "license": "ISC",
     "devDependencies": {
+        "@types/cors": "^2.8.17",
         "@types/express": "^4.17.21",
         "@types/jest": "^29.5.13",
         "@types/node": "^22.6.1",
@@ -23,6 +24,7 @@
     },
     "dependencies": {
         "chalk": "^4.1.2",
+        "cors": "^2.8.5",
         "express": "^4.21.0"
     }
 }

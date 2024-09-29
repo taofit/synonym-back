@@ -40,6 +40,21 @@ const getSynonyms = async (reqPara: ParamsDictionary) => {
     });
 };
 
+const getAllSynonyms = async () => {
+    return new Promise((resolve) => {
+        if (synonymsStorage.length) {
+            const allSynonyms: string[] = [];
+            synonymsStorage.forEach((synonymsGroup) => {
+                synonymsGroup.forEach((synonym) => allSynonyms.push(synonym));
+            });
+
+            resolve(allSynonyms);
+        } else {
+            resolve('No synonyms found');
+        }
+    });
+};
+
 const updateSynonyms = async (reqObj: Request['body']) => {
     return new Promise((resolve, reject) => {
         const { word, newSynonyms } = reqObj;
@@ -62,7 +77,7 @@ const updateSynonyms = async (reqObj: Request['body']) => {
 
                 resolve('Synonyms updated');
             } else {
-                reject('No synonyms found');
+                resolve('No synonyms found');
             }
         } else {
             reject('Invalid input');
@@ -115,4 +130,4 @@ const combineSynonyms = (synonymGroupsIndexSet: Set<number>, newSynonymSet: Set<
     synonymsStorage.push(unionSet);
 };
 
-export default { createSynonyms, getSynonyms, updateSynonyms };
+export default { createSynonyms, getSynonyms, updateSynonyms, getAllSynonyms };

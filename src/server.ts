@@ -1,9 +1,12 @@
 import express, { Request, Response } from 'express';
 import logging from './library/logging';
 import synonymRouter from './routes/synonym';
+import cors from 'cors';
 
 const app = express();
 const port: number = 3000;
+
+app.use(cors());
 
 app.use((req, res, next) => {
     logging.info(`Incoming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
@@ -18,8 +21,11 @@ app.use(express.json());
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    if (req.is('application/json')) {
-        logging.info(`Incoming - BODY: ${JSON.stringify(req.body, null, 2)}`);
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+    if (req.method == 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        return res.status(200).json({});
     }
     next();
 });
