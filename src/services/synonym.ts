@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction, ParamsDictionary } from 'express-serve-static-core';
-import logging from '../library/logging';
 
 //each synonymsGroup consists of a collection of synonyms words
 type synonymsGroup = Set<string>;
