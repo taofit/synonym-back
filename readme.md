@@ -6,8 +6,10 @@
 
 # APIs
 
+-   live root url: https://synonym-back.onrender.com
 -   create synonyms
     -   url: /synonym
+    -   example url for live: https://synonym-back.onrender.com/synonym
     -   payload: ["cheek", "face", "front", "head"]
     -   POST
 -   get synonyms
