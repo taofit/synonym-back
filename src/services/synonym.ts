@@ -5,7 +5,7 @@ type synonymsGroup = Set<string>;
 //storage for all synonyms groups
 let synonymsStorage: synonymsGroup[] = [];
 
-const createSynonyms = async (synonymCollection: Request['body']) => {
+const createSynonyms = async (synonymCollection: any) => {
     return new Promise((resolve, reject) => {
         if (isValidSynonymCollection(synonymCollection)) {
             const newSynonymSet = new Set<string>(synonymCollection);
@@ -23,18 +23,13 @@ const createSynonyms = async (synonymCollection: Request['body']) => {
     });
 };
 
-const getSynonyms = async (reqPara: ParamsDictionary) => {
+const getSynonyms = async (word: string) => {
     return new Promise((resolve, reject) => {
-        const { word } = reqPara;
-        if (typeof word !== 'undefined') {
-            const synonymGroupIndex = getSynonymsGroupIdx(word);
-            if (synonymGroupIndex !== -1) {
-                resolve([...synonymsStorage[synonymGroupIndex]]);
-            } else {
-                resolve('No synonyms found');
-            }
+        const synonymGroupIndex = getSynonymsGroupIdx(word);
+        if (synonymGroupIndex !== -1) {
+            resolve([...synonymsStorage[synonymGroupIndex]]);
         } else {
-            reject('Invalid input');
+            resolve('No synonyms found');
         }
     });
 };
@@ -54,9 +49,8 @@ const getAllSynonyms = async () => {
     });
 };
 
-const updateSynonyms = async (reqObj: Request['body']) => {
+const updateSynonyms = async (word: string, newSynonyms: any) => {
     return new Promise((resolve, reject) => {
-        const { word, newSynonyms } = reqObj;
         if (typeof word !== 'undefined' && isValidStringArr(newSynonyms)) {
             const baseWordSynonymGroupIndex = getSynonymsGroupIdx(word);
 

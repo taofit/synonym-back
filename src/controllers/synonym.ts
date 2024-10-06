@@ -16,7 +16,8 @@ const createSynonym = async (req: Request, res: Response, next: NextFunction) =>
 
 const getSynonyms = async (req: Request, res: Response) => {
     try {
-        const synonyms = await Synonym.getSynonyms(req.params);
+        const { word } = req.params;
+        const synonyms = await Synonym.getSynonyms(word);
         if (synonyms === 'No synonyms found') {
             return res.status(204).json(synonyms);
         }
@@ -39,7 +40,8 @@ const getAllSynonyms = async (req: Request, res: Response) => {
 };
 const updateSynonym = async (req: Request, res: Response) => {
     try {
-        const synonyms = await Synonym.updateSynonyms(req.body);
+        const { word, newSynonyms } = req.body;
+        const synonyms = await Synonym.updateSynonyms(word, newSynonyms);
         if (synonyms === 'No synonyms found') {
             return res.status(204);
         }
