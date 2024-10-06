@@ -19,7 +19,7 @@ const getSynonyms = async (req: Request, res: Response) => {
         const { word } = req.params;
         const synonyms = await Synonym.getSynonyms(word);
         if (synonyms === 'No synonyms found') {
-            return res.status(204).json(synonyms);
+            return res.status(404).json(synonyms);
         }
         res.status(200).json(synonyms);
     } catch (error) {
@@ -31,7 +31,7 @@ const getAllSynonyms = async (req: Request, res: Response) => {
     try {
         const synonyms = await Synonym.getAllSynonyms();
         if (synonyms === 'No synonyms found') {
-            return res.status(204);
+            return res.status(404).json(synonyms);
         }
         res.status(200).json(synonyms);
     } catch (error) {
@@ -43,7 +43,7 @@ const updateSynonym = async (req: Request, res: Response) => {
         const { word, newSynonyms } = req.body;
         const synonyms = await Synonym.updateSynonyms(word, newSynonyms);
         if (synonyms === 'No synonyms found') {
-            return res.status(204);
+            return res.status(404).json(synonyms);
         }
         res.status(200).json(synonyms);
     } catch (error) {
